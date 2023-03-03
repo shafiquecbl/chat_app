@@ -250,6 +250,7 @@ class RoundButton extends StatelessWidget {
   final IconData? iconData;
   final Widget? icon;
   final double radius;
+  final EdgeInsetsGeometry? padding;
   const RoundButton(
       {required this.text,
       required this.onPressed,
@@ -261,6 +262,7 @@ class RoundButton extends StatelessWidget {
       this.iconData,
       this.icon,
       this.radius = 32,
+      this.padding,
       Key? key})
       : super(key: key);
 
@@ -277,7 +279,7 @@ class RoundButton extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: padding ?? const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,

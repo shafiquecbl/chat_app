@@ -12,7 +12,6 @@ class ChatPage extends StatefulWidget {
 
 class ChatPageState extends State<ChatPage> {
   final _controller = TextEditingController();
-
   bool _isComposing = false;
 
   @override

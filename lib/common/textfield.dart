@@ -8,6 +8,10 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final bool obscureText;
   final EdgeInsetsGeometry? padding;
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validator;
+  final Function()? onTap;
+  final bool readOnly;
   const CustomTextField(
       {required this.controller,
       this.hintText,
@@ -16,6 +20,10 @@ class CustomTextField extends StatelessWidget {
       this.prefixIcon,
       this.obscureText = false,
       this.padding,
+      this.keyboardType,
+      this.validator,
+      this.onTap,
+      this.readOnly = false,
       Key? key})
       : super(key: key);
 
@@ -44,6 +52,10 @@ class CustomTextField extends StatelessWidget {
           TextFormField(
             controller: controller,
             obscureText: obscureText,
+            keyboardType: keyboardType,
+            validator: validator,
+            readOnly: readOnly,
+            onTap: onTap,
             decoration: InputDecoration(
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 prefixIcon: prefixIcon,
@@ -64,9 +76,9 @@ class CustomTextField extends StatelessWidget {
                 focusedErrorBorder: border(context),
                 filled: true,
                 fillColor: Theme.of(context).cardColor,
-                contentPadding: const EdgeInsets.all(15),
+                contentPadding: const EdgeInsets.all(20),
                 suffixIcon: suffixIcon),
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
       ),

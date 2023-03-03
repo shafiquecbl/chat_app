@@ -1,7 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:get/get.dart';
 import 'package:chat_app/controller/theme_controller.dart';
 import 'package:chat_app/utils/app_constants.dart';
+import 'common/loading.dart';
 import 'helper/get_di.dart' as di;
 import 'controller/localization_controller.dart';
 import 'theme/dark_theme.dart';
@@ -11,6 +14,7 @@ import 'view/screens/splash/splash.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   Map<String, Map<String, String>> languages = await di.init();
   runApp(MyApp(languages: languages));
 }
@@ -37,6 +41,9 @@ class MyApp extends StatelessWidget {
           translations: Messages(languages: languages),
           fallbackLocale: Locale(AppConstants.languages[0].languageCode,
               AppConstants.languages[0].countryCode),
+          builder: FlutterSmartDialog.init(loadingBuilder: (string) {
+            return const Loadingg();
+          }),
           home: const SplashScreen(),
         );
       });

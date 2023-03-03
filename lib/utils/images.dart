@@ -9,6 +9,7 @@ class Images {
   static const String facebook = 'assets/images/facebook.png';
   static const String apple = 'assets/images/apple.png';
   static const String medal = 'assets/images/medal.png';
+  static const String intro = 'assets/images/intro.png';
 
   // icons
   static const String home_outline = 'assets/icons/home_outline.png';

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:chat_app/data/model/language.dart';
+import 'package:chat_app/data/model/body/language.dart';
 import 'package:chat_app/utils/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

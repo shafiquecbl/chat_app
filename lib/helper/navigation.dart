@@ -5,10 +5,10 @@ pop() => Navigator.pop(Get.context!);
 
 /// Launch a new screen
 Future<T?> launchScreen<T>(Widget child,
-    {bool isNewTask = false,
+    {bool replace = false,
     PageRouteAnimation? pageRouteAnimation = PageRouteAnimation.Slide,
     Duration? duration}) async {
-  if (isNewTask) {
+  if (replace) {
     return await Navigator.of(Get.context!).pushAndRemoveUntil(
       buildPageRoute(child, pageRouteAnimation, duration),
       (route) => false,

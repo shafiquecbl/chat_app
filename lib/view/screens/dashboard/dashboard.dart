@@ -1,3 +1,4 @@
+import 'package:chat_app/controller/auth_controller.dart';
 import 'package:chat_app/utils/icons.dart';
 import 'package:chat_app/view/screens/home/home.dart';
 import 'package:chat_app/view/screens/inbox/inbox.dart';
@@ -14,6 +15,13 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   List<Widget> pages = const [Home(), Inbox(), Profile()];
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    AuthController.to.getUser();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

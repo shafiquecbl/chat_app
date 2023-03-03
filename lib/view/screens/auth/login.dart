@@ -1,15 +1,19 @@
+import 'package:chat_app/common/buttons.dart';
+import 'package:chat_app/controller/auth_controller.dart';
 import 'package:chat_app/helper/navigation.dart';
 import 'package:chat_app/view/screens/auth/signup.dart';
-import 'package:chat_app/view/screens/dashboard/dashboard.dart';
-import 'package:chat_app/view/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:chat_app/common/primary_button.dart';
 import 'package:chat_app/common/textfield.dart';
 import 'package:chat_app/utils/icons.dart';
 import 'package:chat_app/utils/style.dart';
+import 'package:flutter/scheduler.dart';
+
+import 'widget/verify_email_dialog.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+  final bool back, verification;
+  const LoginScreen({this.back = true, this.verification = false, super.key});
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -18,11 +22,32 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  bool obscureText = true;
+
+  @override
+  void initState() {
+    if (widget.verification) {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        showDialog(
+            context: context, builder: (context) => const VerifyEmailDialog());
+      });
+    }
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    email.dispose();
+    password.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        leading: widget.back ? const CustomBackButton() : null,
         title: const Text('Sign In'),
         centerTitle: true,
       ),
@@ -53,10 +78,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 controller: password,
                 labelText: 'Password',
                 hintText: 'Enter your password',
+                obscureText: obscureText,
                 prefixIcon:
                     Icon(FFIcons.lock, color: Theme.of(context).hintColor),
-                suffixIcon:
-                    Icon(FFIcons.eye, color: Theme.of(context).hintColor),
+                suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        obscureText = !obscureText;
+                      });
+                    },
+                    icon:
+                        Icon(FFIcons.eye, color: Theme.of(context).hintColor)),
               ),
               Row(
                 children: [
@@ -87,7 +119,8 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomButton(
                   text: 'Sign In',
                   onPressed: () {
-                    launchScreen(const Dashboard());
+                    AuthController.to
+                        .loginUser(context, email.text, password.text);
                   }),
               const SizedBox(height: 10),
               Row(

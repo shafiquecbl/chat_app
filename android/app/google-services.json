@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "705544426335",
+    "project_id": "chatappdcodax",
+    "storage_bucket": "chatappdcodax.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705544426335:android:090c953f40e0b059fcdcea",
+        "android_client_info": {
+          "package_name": "com.dcodax.chat.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705544426335-cvkbjj2pt3nd1ad43q78i5j52ptqp8dq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOWxKFFAGZhgf7HvQxzgek61ums87Bwys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705544426335-cvkbjj2pt3nd1ad43q78i5j52ptqp8dq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
