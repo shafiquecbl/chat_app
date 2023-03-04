@@ -31,10 +31,18 @@ class AppUser {
         country: json['country'],
         city: json['city'],
         token: json['token'],
-        rating: double.parse(json['rating'].toString()),
-        ratingCount: double.parse(json['ratingCount'].toString()),
-        interests: List<String>.from(json['interests'].map((x) => x)),
-        contacts: List<String>.from(json['contacts'].map((x) => x)),
+        rating: json['rating'] == null
+            ? null
+            : double.parse(json['rating'].toString()),
+        ratingCount: json['ratingCount'] == null
+            ? null
+            : double.parse(json['ratingCount'].toString()),
+        interests: json['interests'] == null
+            ? null
+            : List<String>.from(json['interests'].map((x) => x)),
+        contacts: json['contacts'] == null
+            ? null
+            : List<String>.from(json['contacts'].map((x) => x)),
         infoVisibility: json['infoVisibility'],
       );
 

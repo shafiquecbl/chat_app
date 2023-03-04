@@ -91,17 +91,47 @@ class AuthController extends GetxController implements GetxService {
     }
   }
 
-  updateUser(AppUser user, File? image) async {
+  updateUser(AppUser newUser) async {
     SmartDialog.showLoading();
-    if (image != null) {
-      await authRepo.uploadUserImage(user.email!, image);
-      await getUser();
-      user.image = appUser!.image;
-    }
-    user.password = appUser!.password;
-    await authRepo.updateUser(user.toJson());
+    newUser.email = appUser!.email;
+    var response = await authRepo.updateUser(newUser.toJson());
     SmartDialog.dismiss();
-    getSnackBar('Profile updated successfully');
+    if (response != null) {
+      getSnackBar('Profile updated successfully');
+      var data = jsonDecode(response.body);
+      appUser = AppUser.fromJson(data);
+      update();
+    }
+  }
+
+  void updatePassword(String text) async {
+    SmartDialog.showLoading();
+
+    var response = await authRepo.updatePassword({
+      'email': appUser!.email,
+      'password': text,
+    });
+    if (response != null) {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: appUser!.email!, password: appUser!.password!);
+      FirebaseAuth.instance.currentUser!.updatePassword(text);
+      appUser!.password = text;
+      SmartDialog.dismiss();
+      getSnackBar('Password updated successfully');
+      update();
+    }
+  }
+
+  Future<void> uploadImage(File file) async {
+    SmartDialog.showLoading();
+    var response = await authRepo.uploadUserImage(appUser!.email!, file);
+    SmartDialog.dismiss();
+    if (response != null) {
+      var data = jsonDecode(response.body);
+      appUser!.image = data['image'];
+      getSnackBar('Image updated successfully');
+      update();
+    }
   }
 
   logoutUser() async {

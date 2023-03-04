@@ -25,4 +25,8 @@ class Images {
   static const String order_outline = 'assets/icons/order_outline.png';
   static const String order_filled = 'assets/icons/order_filled.png';
   static const String phone = 'assets/icons/phone.png';
+
+  // demo
+  static const String demouser =
+      'https://img.freepik.com/free-icon/user_318-563642.jpg';
 }

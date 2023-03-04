@@ -169,6 +169,12 @@ class _SignupScreenState extends State<SignupScreen> {
                       }
                     });
                   },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your date of birth';
+                    }
+                    return null;
+                  },
                 ),
                 CustomTextField(
                   controller: country,

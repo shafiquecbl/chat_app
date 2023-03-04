@@ -38,13 +38,17 @@ class AuthRepo {
   }
 
   // update user
-  Future<void> updateUser(Map<String, dynamic> data) async {
-    await apiClient.postData(AppConstants.updateUserURL, data);
+  Future<Response?> updateUser(Map<String, dynamic> data) async {
+    return await apiClient.postData(AppConstants.updateUserURL, data);
+  }
+
+  Future<Response?> updatePassword(Map<String, dynamic> data) async {
+    return await apiClient.postData(AppConstants.updatePasswordURL, data);
   }
 
   // upload user image
-  Future<void> uploadUserImage(String email, File file) async {
-    await apiClient.postMultipartData(AppConstants.updateUserImage,
+  Future<Response?> uploadUserImage(String email, File file) async {
+    return await apiClient.postMultipartData(AppConstants.updateUserImage,
         [MultipartBody('image', XFile(file.path))],
         body: {'email': email});
   }

@@ -130,6 +130,9 @@ http.Response? handleError(http.Response response) {
   if (responseJson['errors'] != null) {
     getSnackBar(responseJson['errors'][0]['msg'], success: false);
     return null;
+  } else if (responseJson['error'] != null) {
+    getSnackBar(responseJson['error'], success: false);
+    return null;
   } else {
     return response;
   }
