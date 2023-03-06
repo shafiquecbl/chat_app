@@ -1,3 +1,4 @@
+import 'package:chat_app/controller/chat_controller.dart';
 import 'package:chat_app/utils/icons.dart';
 import 'package:chat_app/view/screens/home/home.dart';
 import 'package:chat_app/view/screens/inbox/inbox.dart';
@@ -11,9 +12,26 @@ class Dashboard extends StatefulWidget {
   State<Dashboard> createState() => _DashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _DashboardState extends State<Dashboard> with WidgetsBindingObserver {
   List<Widget> pages = const [Home(), Inbox(), Profile()];
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    ChatController.to.initSocket();
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.paused) {
+      ChatController.to.offlineUser();
+    }
+    if (state == AppLifecycleState.resumed) {
+      ChatController.to.onlineUser();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

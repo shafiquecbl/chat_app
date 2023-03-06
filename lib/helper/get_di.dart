@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:chat_app/controller/auth_controller.dart';
+import 'package:chat_app/controller/chat_controller.dart';
 import 'package:chat_app/controller/search_controller.dart';
 import 'package:chat_app/data/api/api_client.dart';
 import 'package:chat_app/data/repository/auth_repo.dart';
+import 'package:chat_app/data/repository/chat_repo.dart';
 import 'package:chat_app/data/repository/search_repo.dart';
 import 'package:flutter/services.dart';
 import 'package:chat_app/controller/localization_controller.dart';
@@ -24,12 +26,14 @@ Future<Map<String, Map<String, String>>> init() async {
   Get.lazyPut(
       () => AuthRepo(apiClient: Get.find(), sharedPreferences: Get.find()));
   Get.lazyPut(() => SearchRepo(apiClient: Get.find()));
+  Get.lazyPut(() => ChatRepo(apiClient: Get.find()));
 
   // Controller
   Get.lazyPut(() => ThemeController(sharedPreferences: Get.find()));
   Get.lazyPut(() => LocalizationController(sharedPreferences: Get.find()));
   Get.lazyPut(() => AuthController(authRepo: Get.find()));
   Get.lazyPut(() => SearchController(searchRepo: Get.find()));
+  Get.lazyPut(() => ChatController(chatRepo: Get.find()));
 
   // Retrieving localized data
   Map<String, Map<String, String>> languages = {};

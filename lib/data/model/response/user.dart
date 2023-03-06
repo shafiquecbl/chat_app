@@ -3,11 +3,11 @@
 class AppUser {
   AppUser(
       {this.name,
+      this.id,
       this.email,
       this.password,
       this.image,
       this.city,
-      this.contacts,
       this.country,
       this.dob,
       this.gender,
@@ -15,13 +15,16 @@ class AppUser {
       this.interests,
       this.rating,
       this.ratingCount,
-      this.token});
-  String? name, email, password, image, gender, dob, country, city, token;
+      this.token,
+      this.isOnline});
+  String? id, name, email, password, image, gender, dob, country, city, token;
   double? rating, ratingCount;
-  List<String>? interests, contacts;
+  List<String>? interests;
   bool? infoVisibility;
+  bool? isOnline;
 
   factory AppUser.fromJson(Map<String, dynamic> json) => AppUser(
+        id: json['_id'],
         name: json['name'],
         email: json['email'],
         password: json['password'],
@@ -40,13 +43,12 @@ class AppUser {
         interests: json['interests'] == null
             ? null
             : List<String>.from(json['interests'].map((x) => x)),
-        contacts: json['contacts'] == null
-            ? null
-            : List<String>.from(json['contacts'].map((x) => x)),
         infoVisibility: json['infoVisibility'],
+        isOnline: json['online'] ?? false,
       );
 
   Map<String, dynamic> toJson() => {
+        '_id': id,
         'name': name,
         'email': email,
         'password': password,
@@ -59,9 +61,6 @@ class AppUser {
         'rating': rating,
         'ratingCount': ratingCount,
         'interests': List<dynamic>.from(interests!.map((x) => x)),
-        'contacts': contacts == null
-            ? null
-            : List<dynamic>.from(contacts!.map((x) => x)),
         'infoVisibility': infoVisibility,
       };
 }
