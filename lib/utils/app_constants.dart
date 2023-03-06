@@ -4,7 +4,7 @@ import 'package:chat_app/data/model/body/language.dart';
 import 'images.dart';
 
 class AppConstants {
-  static const String APP_NAME = 'Hotel Le Paris';
+  static const String APP_NAME = 'Chat App';
 
   // API's
   static const String domain = 'http://192.168.18.52:3000';
@@ -15,6 +15,8 @@ class AppConstants {
   static const String updateUserURL = '$baseURL/users/update-user';
   static const String updatePasswordURL = '$baseURL/users/update-password';
   static const String updateUserImage = '$baseURL/users/update-image';
+  static const String getUsersURL = '$baseURL/users/get-users';
+  static const String searchUsersURL = '$baseURL/users/search-users';
 
   // Shared Key
   static const String THEME = 'theme';

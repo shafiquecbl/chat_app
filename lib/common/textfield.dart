@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final Function()? onTap;
   final bool readOnly;
+  final Function(String)? onChanged;
   const CustomTextField(
       {required this.controller,
       this.hintText,
@@ -24,6 +25,7 @@ class CustomTextField extends StatelessWidget {
       this.validator,
       this.onTap,
       this.readOnly = false,
+      this.onChanged,
       Key? key})
       : super(key: key);
 
@@ -56,6 +58,7 @@ class CustomTextField extends StatelessWidget {
             validator: validator,
             readOnly: readOnly,
             onTap: onTap,
+            onChanged: onChanged,
             decoration: InputDecoration(
                 floatingLabelBehavior: FloatingLabelBehavior.never,
                 prefixIcon: prefixIcon,

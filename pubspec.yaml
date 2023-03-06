@@ -24,6 +24,7 @@ dependencies:
   country_picker: ^2.0.19
   motion_toast: any
   flutter_smart_dialog: ^4.8.2+5
+  socket_io_client: ^2.0.1
 
   #Firebase
   firebase_core: ^2.7.0

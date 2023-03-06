@@ -33,3 +33,12 @@ class TimeAgo {
     }
   }
 }
+
+int getAge(String value) {
+  List<String> list = value.split('-');
+  var date =
+      DateTime(int.parse(list.last), int.parse(list[1]), int.parse(list.first));
+  var now = DateTime.now();
+  var difference = now.difference(date);
+  return (difference.inDays / 365).floor();
+}

@@ -48,6 +48,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   iniData() async {
     bool isUserExist = await checkUser();
+    if (isUserExist) {
+      await AuthController.to.getUser();
+    }
     Future.delayed(const Duration(seconds: 2), () {
       launchScreen(getHomepPage(isUserExist), replace: true);
     });
